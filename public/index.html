@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolsa de Trabajo - Universidad Tecnologica</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <nav class="navbar">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    UT Empleo
+                </a>
+                <button class="navbar-toggle" onclick="toggleMenu()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+                <ul class="navbar-nav" id="navMenu">
+                    <li><a href="/" class="active">Inicio</a></li>
+                    <li><a href="/vacantes.html">Vacantes</a></li>
+                    <li id="nav-guest">
+                        <a href="/login.html" class="btn btn-secondary btn-sm">Iniciar Sesion</a>
+                    </li>
+                    <li id="nav-user" class="hidden">
+                        <a href="/dashboard.html" class="btn btn-primary btn-sm">Mi Panel</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="container">
+                <h1>Tu primer empleo comienza aqui</h1>
+                <p>Conectamos a egresados de la Universidad Tecnologica con las mejores oportunidades laborales. Encuentra tu vacante ideal y da el siguiente paso en tu carrera profesional.</p>
+                <div class="hero-search">
+                    <input type="text" id="heroBusqueda" placeholder="Buscar por puesto, empresa o tecnologia...">
+                    <button onclick="buscarDesdeHero()">Buscar</button>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="number" id="statVacantes">--</span>
+                        <span class="label">Vacantes activas</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="number" id="statEmpresas">--</span>
+                        <span class="label">Empresas registradas</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="number" id="statUsuarios">--</span>
+                        <span class="label">Egresados registrados</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <main class="main-content">
+            <div class="container">
+                <div class="action-bar">
+                    <h2 class="section-title" style="margin-bottom:0">Vacantes Recientes</h2>
+                    <a href="/vacantes.html" class="btn btn-secondary">Ver todas las vacantes</a>
+                </div>
+                <div class="vacantes-grid" id="vacantesRecientes">
+                    <div class="loading"><div class="spinner"></div></div>
+                </div>
+            </div>
+        </main>
+
+        <section style="background: var(--color-white); padding: 60px 20px; text-align: center; border-top: 1px solid var(--color-border);">
+            <div class="container">
+                <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 12px;">Comienza tu carrera profesional hoy</h2>
+                <p style="color: var(--color-text-light); margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto;">Registrate como egresado para postularte a vacantes o como empresa para publicar oportunidades laborales.</p>
+                <div class="d-flex justify-between gap-2" style="justify-content: center;">
+                    <a href="/registro-usuario.html" class="btn btn-primary btn-lg">Soy Egresado</a>
+                    <a href="/registro-empresa.html" class="btn btn-secondary btn-lg">Soy Empresa</a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <p>2025 Bolsa de Trabajo - Universidad Tecnologica. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/js/utils.js"></script>
+    <script src="/js/index.js"></script>
+</body>
+</html>

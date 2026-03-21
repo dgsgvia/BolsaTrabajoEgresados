@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Panel - UT Empleo</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <nav class="navbar" id="mainNavbar"></nav>
+
+        <main class="main-content">
+            <div class="container">
+                <!-- Dashboard Usuario (Egresado) -->
+                <div id="dashboardUsuario" class="hidden">
+                    <div class="dashboard-header">
+                        <h1>Bienvenido, <span id="userName"></span></h1>
+                        <p>Panel de egresado - Gestiona tus postulaciones</p>
+                    </div>
+
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <div class="stat-number" id="statMisPostulaciones">0</div>
+                            <div class="stat-label">Mis Postulaciones</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="statPendientes">0</div>
+                            <div class="stat-label">Pendientes</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="statAceptadas">0</div>
+                            <div class="stat-label">Aceptadas</div>
+                        </div>
+                    </div>
+
+                    <div class="action-bar">
+                        <h2 class="section-title" style="margin-bottom:0">Mis Postulaciones</h2>
+                        <a href="/vacantes.html" class="btn btn-primary">Buscar Vacantes</a>
+                    </div>
+
+                    <div id="misPostulaciones">
+                        <div class="loading"><div class="spinner"></div></div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Empresa -->
+                <div id="dashboardEmpresa" class="hidden">
+                    <div class="dashboard-header">
+                        <h1>Panel de Empresa: <span id="empresaName"></span></h1>
+                        <p>Gestiona tus vacantes y revisa las postulaciones</p>
+                    </div>
+
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <div class="stat-number" id="statMisVacantes">0</div>
+                            <div class="stat-label">Mis Vacantes</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="statPostulacionesRecibidas">0</div>
+                            <div class="stat-label">Postulaciones Recibidas</div>
+                        </div>
+                    </div>
+
+                    <div class="action-bar">
+                        <h2 class="section-title" style="margin-bottom:0">Mis Vacantes</h2>
+                        <button class="btn btn-primary" onclick="mostrarFormVacante()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            Nueva Vacante
+                        </button>
+                    </div>
+
+                    <div id="misVacantes">
+                        <div class="loading"><div class="spinner"></div></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>2025 Bolsa de Trabajo - Universidad Tecnologica.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal Crear/Editar Vacante -->
+    <div class="modal-overlay" id="modalVacante">
+        <div class="modal" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 id="modalVacanteTitle">Nueva Vacante</h3>
+                <button class="modal-close" onclick="cerrarModalVacante()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <form id="vacanteForm" onsubmit="guardarVacante(event)">
+                <input type="hidden" id="vacanteId" value="">
+                <div class="form-group">
+                    <label for="vacanteTitulo">Titulo del puesto *</label>
+                    <input type="text" id="vacanteTitulo" class="form-control" placeholder="Ej: Desarrollador Frontend Jr." required>
+                </div>
+                <div class="form-group">
+                    <label for="vacanteDescripcion">Descripcion *</label>
+                    <textarea id="vacanteDescripcion" class="form-control" rows="4" placeholder="Describe las actividades y responsabilidades del puesto" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="vacanteRequisitos">Requisitos</label>
+                    <textarea id="vacanteRequisitos" class="form-control" rows="3" placeholder="Lista los requisitos y habilidades necesarias"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vacanteSalario">Salario</label>
+                        <input type="text" id="vacanteSalario" class="form-control" placeholder="Ej: $12,000 - $18,000 MXN">
+                    </div>
+                    <div class="form-group">
+                        <label for="vacanteUbicacion">Ubicacion</label>
+                        <input type="text" id="vacanteUbicacion" class="form-control" placeholder="Ej: Queretaro, Qro.">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vacanteTipo">Tipo de contrato</label>
+                        <select id="vacanteTipo" class="form-control">
+                            <option value="Tiempo completo">Tiempo completo</option>
+                            <option value="Medio tiempo">Medio tiempo</option>
+                            <option value="Por proyecto">Por proyecto</option>
+                            <option value="Prácticas profesionales">Practicas profesionales</option>
+                            <option value="Remoto">Remoto</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="estadoGroup" class="hidden">
+                        <label for="vacanteEstado">Estado</label>
+                        <select id="vacanteEstado" class="form-control">
+                            <option value="activa">Activa</option>
+                            <option value="cerrada">Cerrada</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Google Maps Location Picker -->
+                <div class="form-group">
+                    <label>Ubicacion en el mapa (opcional)</label>
+                    <p style="font-size: 0.85rem; color: var(--color-text-light); margin-bottom: 8px;">Haz clic en el mapa para seleccionar la ubicacion exacta del trabajo.</p>
+                    <div id="mapPicker" style="width: 100%; height: 300px; border-radius: 8px; border: 1px solid var(--color-border);"></div>
+                    <input type="hidden" id="vacanteLatitud" value="">
+                    <input type="hidden" id="vacanteLongitud" value="">
+                    <p id="coordenadasSeleccionadas" style="font-size: 0.85rem; color: var(--color-text-light); margin-top: 8px;"></p>
+                </div>
+                <div class="d-flex gap-1">
+                    <button type="submit" class="btn btn-primary" id="btnGuardarVacante">Publicar Vacante</button>
+                    <button type="button" class="btn btn-secondary" onclick="cerrarModalVacante()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Ver Postulaciones -->
+    <div class="modal-overlay" id="modalPostulaciones">
+        <div class="modal" style="max-width: 700px;">
+            <div class="modal-header">
+                <h3>Postulaciones recibidas</h3>
+                <button class="modal-close" onclick="cerrarModalPostulaciones()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div id="postulacionesLista">
+                <div class="loading"><div class="spinner"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/utils.js"></script>
+    <script src="/js/dashboard.js"></script>
+    <!-- Google Maps API - Replace GOOGLE_MAPS_API_KEY_HERE with your actual API key -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpwIkjitgpgNmeC_YPcataPUWYeDh_ZWc" async defer></script>
+</body>
+</html>

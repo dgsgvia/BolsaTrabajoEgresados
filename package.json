@@ -1,0 +1,17 @@
+{
+  "name": "bolsa-trabajo-ut",
+  "version": "1.0.0",
+  "description": "Bolsa de Trabajo para Estudiantes Recién Egresados - Universidad Tecnológica",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0",
+    "express-session": "^1.18.0",
+    "mysql2": "^3.11.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5"
+  }
+}

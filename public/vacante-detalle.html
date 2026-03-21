@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de Vacante - UT Empleo</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <nav class="navbar" id="mainNavbar"></nav>
+
+        <main class="main-content">
+            <div class="container">
+                <div class="vacante-detalle" id="vacanteDetalle">
+                    <div class="loading"><div class="spinner"></div></div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>2025 Bolsa de Trabajo - Universidad Tecnologica.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal Postulacion -->
+    <div class="modal-overlay" id="modalPostulacion">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Postularse a esta vacante</h3>
+                <button class="modal-close" onclick="cerrarModal()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <form onsubmit="enviarPostulacion(event)">
+                <div class="form-group">
+                    <label for="mensajePostulacion">Mensaje (opcional)</label>
+                    <textarea id="mensajePostulacion" class="form-control" rows="4" placeholder="Escribe un mensaje para la empresa explicando por que te interesa esta vacante..."></textarea>
+                </div>
+                <div class="d-flex gap-1">
+                    <button type="submit" class="btn btn-primary" id="btnPostular">Enviar Postulacion</button>
+                    <button type="button" class="btn btn-secondary" onclick="cerrarModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/utils.js"></script>
+    <!-- EmailJS SDK - Replace EMAILJS_PUBLIC_KEY_HERE with your actual public key -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("OcaVvEmNpB8CbFkDE");
+        })();
+    </script>
+    <script src="/js/vacante-detalle.js"></script>
+    <!-- Google Maps API - Replace GOOGLE_MAPS_API_KEY_HERE with your actual API key -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpwIkjitgpgNmeC_YPcataPUWYeDh_ZWc" async defer></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Empresa - UT Empleo</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <nav class="navbar">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    UT Empleo
+                </a>
+                <ul class="navbar-nav">
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/vacantes.html">Vacantes</a></li>
+                    <li><a href="/login.html">Iniciar Sesion</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div class="auth-container" style="max-width: 540px;">
+                <div class="auth-card">
+                    <h2>Registro de Empresa</h2>
+                    <p class="auth-subtitle">Registra tu empresa para publicar vacantes</p>
+
+                    <div id="alertContainer"></div>
+
+                    <form id="registroEmpresaForm" onsubmit="handleRegistroEmpresa(event)">
+                        <div class="form-group">
+                            <label for="nombre">Nombre de la empresa *</label>
+                            <input type="text" id="nombre" class="form-control" placeholder="Nombre de tu empresa" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion">Descripcion de la empresa</label>
+                            <textarea id="descripcion" class="form-control" placeholder="Describe brevemente a que se dedica tu empresa" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electronico *</label>
+                            <input type="email" id="email" class="form-control" placeholder="contacto@empresa.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contrasena *</label>
+                            <input type="password" id="password" class="form-control" placeholder="Minimo 6 caracteres" required minlength="6">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="telefono">Telefono</label>
+                                <input type="tel" id="telefono" class="form-control" placeholder="555-0101">
+                            </div>
+                            <div class="form-group">
+                                <label for="sitio_web">Sitio web</label>
+                                <input type="url" id="sitio_web" class="form-control" placeholder="https://tuempresa.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="direccion">Direccion</label>
+                            <input type="text" id="direccion" class="form-control" placeholder="Calle, Ciudad, Estado">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg" id="btnRegistro">Registrar Empresa</button>
+                    </form>
+
+                    <div class="auth-link">
+                        <p>Ya tienes cuenta? <a href="/login.html">Inicia sesion</a></p>
+                        <p class="mt-1">Eres egresado? <a href="/registro-usuario.html">Registrate aqui</a></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>2025 Bolsa de Trabajo - Universidad Tecnologica.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/js/utils.js"></script>
+    <script src="/js/auth.js"></script>
+</body>
+</html>

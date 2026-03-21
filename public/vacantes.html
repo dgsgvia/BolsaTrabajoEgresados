@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacantes - UT Empleo</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <nav class="navbar" id="mainNavbar"></nav>
+
+        <main class="main-content">
+            <div class="container">
+                <h1 class="page-title">Vacantes Disponibles</h1>
+
+                <!-- Filters -->
+                <div class="filters-bar">
+                    <div class="form-group">
+                        <label>Buscar</label>
+                        <input type="text" id="filtroBusqueda" class="form-control" placeholder="Puesto, empresa, tecnologia...">
+                    </div>
+                    <div class="form-group">
+                        <label>Tipo de contrato</label>
+                        <select id="filtroTipo" class="form-control">
+                            <option value="">Todos</option>
+                            <option value="Tiempo completo">Tiempo completo</option>
+                            <option value="Medio tiempo">Medio tiempo</option>
+                            <option value="Por proyecto">Por proyecto</option>
+                            <option value="Prácticas profesionales">Practicas profesionales</option>
+                            <option value="Remoto">Remoto</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Ubicacion</label>
+                        <input type="text" id="filtroUbicacion" class="form-control" placeholder="Ciudad o estado...">
+                    </div>
+                    <button class="btn btn-primary" onclick="filtrarVacantes()" style="margin-top: auto;">Buscar</button>
+                </div>
+
+                <div id="resultadosInfo" class="mb-2" style="color: var(--color-text-light); font-size: 0.9rem;"></div>
+
+                <!-- Vacantes Grid -->
+                <div class="vacantes-grid" id="vacantesGrid">
+                    <div class="loading"><div class="spinner"></div></div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>2025 Bolsa de Trabajo - Universidad Tecnologica.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/js/utils.js"></script>
+    <script src="/js/vacantes.js"></script>
+</body>
+</html>
