@@ -22,7 +22,7 @@ form.addEventListener("submit", async (e) => {
             // Construye link de recuperación con el token que imprime el backend en consola
             // (Si quieres puedes enviarlo directamente desde el backend, pero con EmailJS lo hacemos en frontend)
             const token = data.token; // Modifica tu backend si quieres devolver token
-            const link = `https://TU-DOMINIO/reset-password.html?token=${token}`;
+            const link = `https://bolsatrabajoegresados-production.up.railway.app/reset-password.html?token=${token}`;
 
             // Envía correo usando EmailJS
             await emailjs.send("service_wa1l6so", "template_0v6xbp7", {
