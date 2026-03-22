@@ -1,11 +1,73 @@
-<!-- Recuperar.html -->
-<form id="formRecuperar">
-  <input type="email" id="email" placeholder="Correo" required />
-  <button type="submit">Enviar enlace</button>
-</form>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Contraseña - UT Empleo</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="container">
+                <a href="/" class="navbar-brand">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                    UT Empleo
+                </a>
+                <ul class="navbar-nav">
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/vacantes.html">Vacantes</a></li>
+                </ul>
+            </div>
+        </nav>
 
-<!-- Carga la librería de EmailJS primero -->
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+        <main class="main-content">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h2>Recuperar Contraseña</h2>
+                    <p class="auth-subtitle">Ingresa tu correo electronico y te enviaremos un enlace para restablecer tu contraseña</p>
 
-<!-- Luego tu JS personalizado -->
-<script src="/js/recuperar.js"></script>
+                    <div id="alertContainer"></div>
+
+                    <form id="formRecuperar">
+                        <div class="form-group">
+                            <label for="email">Correo electronico</label>
+                            <input type="email" id="email" class="form-control" placeholder="tu@email.com" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                            Enviar enlace de recuperacion
+                        </button>
+                    </form>
+
+                    <div class="auth-link">
+                        <p>Recordaste tu contraseña? <a href="/login.html">Volver a iniciar sesion</a></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <p>2025 Bolsa de Trabajo - Universidad Tecnologica.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Carga la librería de EmailJS primero -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script src="/js/utils.js"></script>
+    <!-- Luego tu JS personalizado -->
+    <script src="/js/recuperar.js"></script>
+</body>
+</html>
