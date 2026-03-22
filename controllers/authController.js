@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const Usuario = require('../models/Usuario');
 const Empresa = require('../models/Empresa');
+const crypto = require('crypto');
+const db = require('../config/database');
 
 const authController = {
     // Registro de usuario (egresado)
@@ -124,5 +126,65 @@ const authController = {
         }
     }
 };
+
+// Solicitar recuperación de contraseña
+async recuperarPassword(req, res) {
+    try {
+        const { email } = req.body;
+
+        const usuario = await Usuario.buscarPorEmail(email);
+
+        if (!usuario) {
+            return res.json({ mensaje: 'Si el correo existe, se enviará un enlace.' });
+        }
+
+        const token = crypto.randomBytes(32).toString('hex');
+        const expiry = new Date(Date.now() + 3600000); // 1 hora
+
+        await db.execute(
+            'UPDATE usuarios SET reset_token = ?, reset_token_expiry = ? WHERE email = ?',
+            [token, expiry, email]
+        );
+
+        const link = `https://TU-DOMINIO/reset-password.html?token=${token}`;
+
+        console.log("LINK DE RECUPERACIÓN:", link);
+
+        res.json({ mensaje: 'Correo enviado.' });
+
+    } catch (error) {
+        console.error('Error en recuperar contraseña:', error);
+        res.status(500).json({ error: 'Error interno del servidor.' });
+    }
+},
+
+// Cambiar contraseña
+async resetPassword(req, res) {
+    try {
+        const { token, password } = req.body;
+
+        const [usuarios] = await db.execute(
+            'SELECT * FROM usuarios WHERE reset_token = ? AND reset_token_expiry > NOW()',
+            [token]
+        );
+
+        if (usuarios.length === 0) {
+            return res.status(400).json({ error: 'Token inválido o expirado.' });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        await db.execute(
+            'UPDATE usuarios SET password = ?, reset_token = NULL, reset_token_expiry = NULL WHERE id = ?',
+            [hashedPassword, usuarios[0].id]
+        );
+
+        res.json({ mensaje: 'Contraseña actualizada correctamente.' });
+
+    } catch (error) {
+        console.error('Error en reset password:', error);
+        res.status(500).json({ error: 'Error interno del servidor.' });
+    }
+}
 
 module.exports = authController;
