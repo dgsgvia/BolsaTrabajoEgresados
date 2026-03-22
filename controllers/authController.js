@@ -149,7 +149,7 @@ const authController = {
 
             console.log("LINK DE RECUPERACIÓN:", link);
 
-            res.json({ mensaje: 'Correo enviado.' });
+            res.json({ mensaje: 'Correo enviado.', token });
 
         } catch (error) {
             console.error('Error en recuperar contraseña:', error);
